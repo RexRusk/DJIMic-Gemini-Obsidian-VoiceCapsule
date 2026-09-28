@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  voice-capsule:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - OBSIDIAN_VAULT_PATH=${OBSIDIAN_VAULT_PATH}
+      - UPLOAD_DIR=/tmp/voice-capsule/uploads
+      - MAX_FILE_SIZE=104857600
+      - CLEANUP_AFTER_HOURS=24
+    volumes:
+      - ./uploads:/tmp/voice-capsule/uploads
+      - ${OBSIDIAN_VAULT_PATH}:${OBSIDIAN_VAULT_PATH}
+    restart: unless-stopped

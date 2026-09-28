@@ -1,0 +1,5 @@
+# 一行写一个要向知识库提的问题。以 # 开头的行会被忽略。
+# 笔记放在 knowledge 目录，或用 --knowledge 指向你的笔记文件夹。
+# 运行: python scripts\python\ask_knowledge.py
+
+Voice Capsule 用什么把语音转成文字？

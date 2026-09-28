@@ -1,0 +1,202 @@
+# Python Dependencies for Personal Voice Capsule
+# ============================================
+# Install with: pip install -r requirements.txt
+# ============================================
+
+# Core Dependencies
+# ============================================
+
+# Google Generative AI (Gemini API)
+google-generativeai>=0.3.0
+
+# Python environment variable management
+python-dotenv>=1.0.0
+
+# YAML configuration file parsing
+PyYAML>=6.0
+
+# Audio file processing
+pydub>=0.25.1
+
+# File system operations and path handling
+pathlib>=1.0.1
+
+# ============================================
+# Optional: Alternative ASR Providers
+# ============================================
+
+# OpenAI Whisper API (if using OpenAI instead of Gemini)
+openai>=1.12.0
+
+# Local Whisper (for offline transcription)
+# Uncomment if you want local processing:
+# openai-whisper>=20231117
+
+# ============================================
+# Optional: AI Enhancement (Level 3)
+# ============================================
+
+# Anthropic Claude API
+anthropic>=0.18.0
+
+# ============================================
+# File & Data Processing
+# ============================================
+
+# Date and time handling
+python-dateutil>=2.8.2
+
+# File watching (for automation)
+watchdog>=3.0.0
+
+# ============================================
+# Markdown & Text Processing
+# ============================================
+
+# Markdown parsing and generation
+markdown>=3.5
+
+# Text processing utilities
+regex>=2023.12.25
+
+# ============================================
+# HTTP & API Requests
+# ============================================
+
+# HTTP library for API calls
+requests>=2.31.0
+
+# Required by httplib2 so Gemini file uploads use the system proxy
+PySocks>=1.7.1
+
+# Async HTTP (for concurrent processing)
+aiohttp>=3.9.0
+
+# ============================================
+# Logging & Monitoring
+# ============================================
+
+# Rich console output (beautiful terminal logs)
+rich>=13.7.0
+
+# Progress bars
+tqdm>=4.66.0
+
+# ============================================
+# System Integration
+# ============================================
+
+# Cross-platform file system notifications
+pyobjc-framework-FSEvents>=10.1; sys_platform == 'darwin'
+
+# macOS system integration
+pyobjc-framework-Cocoa>=10.1; sys_platform == 'darwin'
+
+# Windows system integration
+pywin32>=306; sys_platform == 'win32'
+
+# ============================================
+# Testing & Development (Optional)
+# ============================================
+
+# Unit testing
+pytest>=7.4.0
+
+# Code formatting
+black>=23.12.0
+
+# Linting
+pylint>=3.0.0
+
+# Type checking
+mypy>=1.8.0
+
+# ============================================
+# Audio Processing (Advanced)
+# ============================================
+
+# FFmpeg Python bindings (for audio conversion)
+ffmpeg-python>=0.2.0
+
+# Audio analysis
+librosa>=0.10.1
+
+# NumPy (required by librosa and microphone capture)
+numpy>=1.24.0
+
+# Microphone capture for scripts/python/listen.py
+sounddevice>=0.4.6
+
+# ============================================
+# NotebookLM Integration (Optional)
+# ============================================
+
+# Google API client
+google-api-python-client>=2.100.0
+google-auth-httplib2>=0.2.0
+google-auth-oauthlib>=1.2.0
+
+# ============================================
+# Version Compatibility Notes
+# ============================================
+#
+# Python Version: 3.8+
+# Tested on: Python 3.9, 3.10, 3.11, 3.12
+# Recommended: Python 3.11
+#
+# macOS: 12.0+ (Monterey or later)
+# Windows: 10/11
+# Linux: Ubuntu 20.04+
+
+# ============================================
+# Installation Instructions
+# ============================================
+#
+# Basic installation (minimum required):
+# pip install google-generativeai python-dotenv PyYAML pydub rich
+#
+# Full installation (all features):
+# pip install -r requirements.txt
+#
+# Development installation (includes testing tools):
+# pip install -r requirements.txt
+# pip install -e .
+
+# ============================================
+# Troubleshooting
+# ============================================
+#
+# If you encounter SSL errors on macOS:
+# pip install --upgrade certifi
+#
+# If pydub fails to find FFmpeg:
+# macOS: brew install ffmpeg
+# Windows: Download from https://ffmpeg.org/download.html
+# Linux: sudo apt-get install ffmpeg
+#
+# If you get permission errors:
+# pip install --user -r requirements.txt
+#
+# For Apple Silicon (M1/M2/M3) Macs:
+# Some packages may need Rosetta or native ARM builds
+# Use: arch -arm64 pip install -r requirements.txt
+
+# ============================================
+# Minimal Requirements (Level 1 - Basic Setup)
+# ============================================
+#
+# If you only want basic transcription without automation:
+# google-generativeai>=0.3.0
+# python-dotenv>=1.0.0
+# PyYAML>=6.0
+# rich>=13.7.0
+
+# ============================================
+# Production Deployment
+# ============================================
+#
+# For production use, pin exact versions:
+# pip freeze > requirements-lock.txt
+#
+# Then install with:
+# pip install -r requirements-lock.txt
