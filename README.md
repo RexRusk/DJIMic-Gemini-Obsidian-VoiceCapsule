@@ -6,7 +6,7 @@ This repository starts from [DjiMic3-Gemini-Obsidian-VoiceCapsule](https://githu
 
 This version keeps that transcription path and adds a **knowledge base**. You write the notes. The program answers fixed questions from those notes only.
 
-Hardware control of the microphone is out of scope. [DJI-Mic-Control](https://github.com/ShadowBitBasher/DJI-Mic-Control) is a separate USB settings tool and is not used here. Any microphone that Windows can select as an input device is enough. DJI Mic Mini is the one used during setup: connect the receiver by USB-C and wait until the MIC RX light is solid green, then choose it as the Windows input device.
+Hardware control of the microphone is out of scope. [DJI-Mic-Control](https://github.com/ShadowBitBasher/DJI-Mic-Control) is a separate USB settings tool and is not used here. Any microphone that can select as an input device is enough. DJI Mic Mini is the one used during setup: connect the receiver by USB-C and wait until the MIC RX light is solid green, then choose it as the input device.
 
 ## What the knowledge base does
 
@@ -17,7 +17,7 @@ Notes live in [`knowledge/`](knowledge/) as Markdown files, one topic per file. 
 - The question and answer are saved under `dialogues/` as a separate Markdown file. That folder is not read back into the knowledge base.
 - If `OBSIDIAN_VAULT_PATH` in `configs/.env` points at a real directory, that directory is used instead of `knowledge/`. The Obsidian app does not need to be open. [`scripts/python/obsidian_sync.py`](scripts/python/obsidian_sync.py) is only for writing a transcription into a vault inbox.
 
-## Windows setup
+## Setup
 
 Python 3.10 or newer. From the repository root:
 
@@ -41,7 +41,7 @@ GEMINI_API_KEY=your_gemini_api_key_here
 GEMINI_MODEL=gemini-2.5-flash
 ```
 
-`gemini-1.5-flash` in the original template no longer accepts `generateContent`. On Windows, transcription and Q&A use the system proxy already configured for the browser (`Internet Settings`), so Python reaches the Gemini API the same way the browser does.
+`gemini-2.5-flash` in the original template no longer accepts `generateContent`. Transcription and Q&A use the system proxy already configured for the browser (`Internet Settings`), so Python reaches the Gemini API the same way the browser does.
 
 Check the key, then transcribe a file:
 
@@ -58,7 +58,7 @@ python scripts\python\transcribe.py path\to\recording.m4a
 
 ```markdown
 Voice Capsule uses Google Gemini 2.5 Flash to turn speech into text.
-The microphone is a DJI Mic Mini, connected over USB-C and selected as the Windows input device.
+The microphone is a DJI Mic Mini, connected over USB-C and selected as the input device.
 ```
 
 2. Put one question per line in [`configs/preset_questions.txt`](configs/preset_questions.txt). Lines starting with `#` are ignored.
@@ -82,7 +82,7 @@ The script prints the answer and the note filenames it actually sent to the mode
 ```text
 knowledge/                         Your Markdown notes
 configs/preset_questions.txt       Fixed questions for the knowledge base
-scripts/python/transcribe.py       Gemini transcription, using the Windows system proxy
+scripts/python/transcribe.py       Gemini transcription, using the system proxy
 scripts/python/ask_knowledge.py    Answer questions from knowledge/
 dialogues/                         Saved Q&A transcripts (not part of the knowledge base)
 ```
