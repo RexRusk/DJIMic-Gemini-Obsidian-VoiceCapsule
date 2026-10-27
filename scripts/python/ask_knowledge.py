@@ -14,6 +14,7 @@ from transcribe import VoiceCapsuleTranscriber, console
 SKIP_DIRS = {".obsidian", ".git", ".venv", "node_modules"}
 CHUNK_CHARS = 1200
 CONTEXT_CHARS = 12000
+AUDIO_EXTENSIONS = {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".aac", ".webm", ".mp4"}
 
 
 def load_questions(path: Path) -> List[str]:
@@ -153,8 +154,14 @@ def render(pairs: List[Tuple[str, str]], knowledge: Path) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Answer questions from Markdown notes")
-    parser.add_argument("question", nargs="?", help="Ask one question directly")
+    parser = argparse.ArgumentParser(
+        description="Answer questions from Markdown notes. Pass text, or an audio file to transcribe first."
+    )
+    parser.add_argument(
+        "question",
+        nargs="?",
+        help="A question in text, or a path to an audio file (.wav, .m4a, .mp3, ...)",
+    )
     parser.add_argument(
         "--questions",
         default="configs/preset_questions.txt",
@@ -175,7 +182,19 @@ def main() -> None:
     library = []
     for path in files:
         library.extend(chunks_for(path, knowledge))
-    questions = [args.question] if args.question else load_questions(Path(args.questions))
+    if args.question:
+        maybe_audio = Path(args.question)
+        if maybe_audio.is_file() and maybe_audio.suffix.lower() in AUDIO_EXTENSIONS:
+            console.print(f"[cyan]Transcribing spoken question: {maybe_audio.name}[/cyan]")
+            spoken = transcriber.transcribe_audio(maybe_audio)
+            if not spoken:
+                console.print("[red]Could not transcribe the audio file.[/red]")
+                sys.exit(1)
+            questions = [spoken]
+        else:
+            questions = [args.question]
+    else:
+        questions = load_questions(Path(args.questions))
     console.print(
         f"Knowledge [bold]{knowledge}[/bold]: {len(files)} note(s), {len(questions)} question(s)"
     )
