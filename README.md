@@ -75,6 +75,12 @@ Or ask a single question:
 python scripts\python\ask_knowledge.py "What does Voice Capsule use for speech to text?"
 ```
 
+Spoken questions: pass an audio file. The script transcribes it first, then answers from the notes.
+
+```powershell
+python scripts\python\ask_knowledge.py path\to\recording.m4a
+```
+
 The script prints the answer and the note filenames it actually sent to the model. It also writes `dialogues/answers-YYYYMMDD-HHMMSS.md`.
 
 ## Layout added here
